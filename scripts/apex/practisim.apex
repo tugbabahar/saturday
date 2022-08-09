@@ -1,0 +1,1 @@
+practisim.method1();

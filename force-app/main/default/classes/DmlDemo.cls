@@ -67,6 +67,7 @@ public  class DmlDemo {
        acc.Active__c = 'Yes';
        listAccount.add(acc);
    }
+}
 
    system.debug('size of list = ' + listAccount.size());
    if (!listAccount.isEmpty()) {

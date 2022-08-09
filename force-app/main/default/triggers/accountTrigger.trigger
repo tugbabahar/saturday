@@ -1,6 +1,78 @@
-trigger accountUpdateTrigger on Account (before insert, before update,after insert,after update) {
+trigger accountTrigger on Account (before insert, before update,after insert,after update) {
+
+if (trigger.isAfter && trigger.isInsert) {
+    contacthandler_assg.createcontact(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
+}
+
+
+
+    /*system.debug('====Trigger START====');
+    if (trigger.isBefore) {
+        AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+    }
     
-   
+    system.debug('====Trigger END====');*/
+
+
+    
+    
+    
+/*   system.debug('====Trigger START====');
+  if (trigger.isBefore) {
+    System.debug('Before insert/update trigger on Account object');
+    for (account eachAcc : trigger.new) {
+        if (trigger.isInsert && eachAcc.Active__c =='yes') {
+            eachAcc.Description = 'Account is now active. Enjoy!';
+        }
+        if (trigger.isUpdate) {
+            if( eachAcc.Active__c =='yes' && trigger.oldMap.get(eachAcc.id) != trigger.newMap.get(eachAcc.id)){
+                eachAcc.Description = 'Account is now active. Enjoy!';
+            }
+        }
+    }
+    
+  }
+          system.debug('====Trigger END====');*/
+
+/*if (trigger.isBefore) {
+        for (account eachAcc : trigger.new) {
+            boolean updateDesc = false;
+            if (trigger.isInsert && eachAcc.Active__c =='yes') {
+               updateDesc = true; 
+            }
+            if(trigger.isUpdate){
+                Map<id, Account> triggerOldMap = trigger.oldMap;
+                Account oldAccount = trigger.oldMap.get(eachAcc.id);
+                Account newAccount = eachAcc;
+                if (newAccount.Active__c =='yes' && newAccount.Active__c != oldAccount.Active__c) {
+                    updateDesc = true;
+                }
+            }
+            if(updateDesc){
+                eachAcc.Description='Account is now active. Enjoy!!'; 
+            }
+            
+        }
+    }
+*/
+
+    
+   /* system.debug('====Trigger START====');
+  if (trigger.isBefore) {
+    System.debug('Before insert/update trigger on Account object');
+    for (account eachAcc : trigger.new) {
+        if (trigger.isInsert && eachAcc.Active__c =='yes') {
+            eachAcc.Description = 'Account is now active. Enjoy!';
+        }
+    }
+    
+  }
+          system.debug('====Trigger END====');*/
+
+
+
+
+   /*
     system.debug('====Trigger START====');
 
     if(trigger.isAfter && trigger.isUpdate){
@@ -26,9 +98,8 @@ trigger accountUpdateTrigger on Account (before insert, before update,after inse
         system.debug('count of website updated accounts => ' + countwebsiteupdate);
     }
     
-    system.debug('====Trigger END====');
+    system.debug('====Trigger END====');*/
     
- 
    
    
     /* map<id, account> trgOldMap = trigger.oldMap;
