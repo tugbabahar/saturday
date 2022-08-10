@@ -1,7 +1,11 @@
 trigger accountTrigger on Account (before insert, before update,after insert,after update) {
 
-if (trigger.isAfter && trigger.isInsert) {
+/*if (trigger.isAfter && trigger.isInsert) {
     contacthandler_assg.createcontact(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
+    
+}*/
+if (trigger.isAfter && trigger.isUpdate) {
+    AccountTriggerHandler.updateVIPForAllContacts(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
 }
 
 

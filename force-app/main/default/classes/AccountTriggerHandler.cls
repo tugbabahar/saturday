@@ -1,5 +1,5 @@
 public class AccountTriggerHandler {
-    public static void updateAccountDescription() {
+    /*public static void updateAccountDescription() {
      for (Account eachAcc : accTriggerNew) {
          //when inserted
          boolean updateDesc = false;
@@ -20,5 +20,49 @@ public class AccountTriggerHandler {
              eachAcc.Description = 'Account is now active. Enjoy!!!!!';
          }
      }
-    }
+    }*/
+    public static void updateVIPForAllContacts  (List<account> accTriggerNew, 
+                                                 List<account> accTriggerOld,
+                                                 Map<id, account> accTriggerNewMap,
+                                                 Map<id, account> accTriggerOldMap) {
+       Set<id> setAccIDs = new Set<id>(); 
+       for (account eachAcc : accTriggerNew) {
+        if (eachAcc.VIP__c != accTriggerOldMap.get(eachAcc.Id).VIP__c) {
+            setAccIDs.add(eachAcc.Id);
+        }
+        
+       }
+       List<contact> listContacts = [Select id,name,AccountId,vip__c from contact where AccountId in : setAccIDs];
+       for (contact  eachContact : listContacts) {
+        eachContact.VIP__c = accTriggerNewMap.get(eachContact.Account.Id).VIP__c;
+        
+       }
+       update listContacts;
+    }/* public static void updateVIPForAllContacts(List<account> accTriggerNew, 
+    List<account> accTriggerOld,
+    Map<id, account> accTriggerNewMap,
+    Map<id, account> accTriggerOldMap) {
+set<id> setAccIds = new set<id>();
+for (account eachAcc : accTriggerNew) {
+account oldAccount = accTriggerOldMap.get(eachacc.Id);
+if(eachAcc.vip__c != oldAccount.vip__c){
+setAccIds.add(eachAcc.Id);
+}
+}
+//check if atleast one account's vip is updated.
+if(!setAccIds.isEmpty()){
+//fetch all contacts for accounts whose vip field is changed.
+List<Contact> listContacts = [select id, name, vip__c, accountid from contact where accountid in :setAccIds];
+//check if atleast one contact is found
+if(!listContacts.isEmpty()){
+for (contact eachContact : listContacts) {
+account newAccountRecord = accTriggerNewMap.get(eachContact.accountid);
+eachContact.VIP__c = newAccountRecord.VIP__c;// GET IT FROM ACCOUNT's VIP FIELD
+}
+//update all the contacts
+update listContacts;
+}
+}
+}*/
+    
  }
