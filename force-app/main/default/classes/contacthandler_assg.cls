@@ -14,9 +14,9 @@ for (Account eachAcc : accTriggerNew) {
 }*/
 
 }
-public static void updateAccountRollUpField(set<id> accountIds) {
+public static void updateAccountRollUpField(set<id> accountids) {
   //Fetch all accounts and its related contact using inner query
-  List<account> listAccounts = [select id, number_of_contacts__c, (select id from Contacts) from account where id in :accountIds];
+  List<account> listAccounts = [select id, number_of_contacts__c, (select id from Contacts) from account where id in :accountids];
   for (account eachAccount : listAccounts) {
       List<contact> accContacts = eachAccount.contacts;
       //get number of contact.

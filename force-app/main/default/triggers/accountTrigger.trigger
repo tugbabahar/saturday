@@ -1,21 +1,25 @@
 trigger accountTrigger on Account (before insert, before update,after insert,after update) {
+  /*  if (trigger.isAfter && trigger.isUpdate) {
+        AccountTriggerHandler.ValidateAnnulRev(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
+    }*/
+
 
 /*if (trigger.isAfter && trigger.isInsert) {
     contacthandler_assg.createcontact(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
     
 }*/
+     system.debug('====Trigger START====');
 if (trigger.isAfter && trigger.isUpdate) {
     AccountTriggerHandler.updateVIPForAllContacts(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
 }
 
 
 
-    /*system.debug('====Trigger START====');
     if (trigger.isBefore) {
         AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
     
-    system.debug('====Trigger END====');*/
+    system.debug('====Trigger END====');
 
 
     
@@ -258,4 +262,18 @@ if (trigger.isAfter && trigger.isUpdate) {
         }
     
         */
+
+       /* if (trigger.isAfter && trigger.isInsert) {
+            AccountTriggerHandler.createContact(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
+        }*/
+
+       /* if (trigger.isAfter && trigger.isUpdate) {
+            AccountTriggerHandler.AccountUpdate(trigger.new);
+        }*/
+       /* if (trigger.isAfter && trigger.isUpdate) {
+            AccountTriggerHandler.AccountContactUpdate(trigger.new,trigger.old,trigger.newMap,trigger.oldMap); 
+        }*/
+       
+
+
     }

@@ -2,11 +2,12 @@ public  class DmlDemo {
    public static void dmlInsert_stndObj() {
     Account acc = new Account();
     acc.Name = 'SoftInnovas';
+    acc.Active__c = 'Yes';
     insert acc;
     System.debug(acc);
     
    }
-   public static void dmlInsertDemo_cstmObj() {
+  /* public static void dmlInsertDemo_cstmObj() {
     salesforce_project__c sp = new salesforce_project__c();
     sp.project_name__c = ' Teach DML to falcons';
     sp.description__c = 'All 40 % are great learners';
@@ -19,16 +20,19 @@ public  class DmlDemo {
       acc.site = 'www.softinnovas.com';
       update acc;
       System.debug('acc = '+ acc);
-   }
+   }*/
    public static void dmlUpdateDemo_2() {
-      Account acc = [select id,name from Account where name='SoftInnovas Inc.' limit 1];
-      Contact cnt = new Contact();
-      cnt.LastName = 'Biden';
-      cnt.AccountId = acc.Id;
-      insert cnt;
+      account acc = [select id, name from account where name = 'SoftInnovas Inc.' limit 1];
+
+      //2. create contact's instance
+      Contact c = new Contact();
+      c.LastName = 'Biden';
+      c.AccountId = acc.Id;
+      insert c;
+      System.debug(c);
    }
    
-   public static void dmlInsertRelatedDemo_2() {
+  /* public static void dmlInsertRelatedDemo_2() {
       Salesforce_Project__c sp = [select id, name from Salesforce_Project__c order by CreatedDate DESC limit 1];
 
       Salesforce_Ticket__c st = new Salesforce_Ticket__c();
@@ -55,7 +59,7 @@ public  class DmlDemo {
    listAcc.add(acc3);
 
    insert listAcc;
-  }*/
+  }
   public static void dmlMultipleRecordInsert_right2() {
    //1. we create a new LIST<sObject>
    List<account> listAccount = new list<account>();
@@ -69,13 +73,12 @@ public  class DmlDemo {
    }
 }
 
-   system.debug('size of list = ' + listAccount.size());
+   system.debug('size of list' =  + listAccount.size());
    if (!listAccount.isEmpty()) {
        insert listAccount;
-   }
+   }*/
 }
 
-  }
-
+  
 
 

@@ -22,10 +22,30 @@ public static void updatecase() {
    
     
 }*/
-public static void casedelete() {
+/*public static void casedelete() {
 List<Case> ls2 = [select Subject from case where Subject ='Testing case '];
 delete ls2;   
 
 System.debug('testcase deleted ==> '+ls2);
+}*/
+
+public static void caseinsert()
+{
+case varcase = new case();
+varcase.Subject = 'Testcase';
+varcase.Origin='Phone';
+insert varcase;
 }
+public static void caseupdate()
+{
+case varcase = [select id,Subject from case where Subject ='Testcase'] ;
+varcase.Subject = 'Testing case l';
+update varcase;
+}
+public static void casedelete()
+{
+case varcase = [select id,Subject from case where Subject like '%case 1%'] ;
+delete varcase;
+}
+
 }

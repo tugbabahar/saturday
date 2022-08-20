@@ -1,24 +1,28 @@
 public with sharing class SoqlDemo2 {
-   
     public static void childToParent_Soql1() {
-        List<contact> listCnt = [Select id,name,Account.Name FROM Contact WHERE Account.Industry = 'Energy'];
-        for (contact eachContact : listCnt) {
-            String accName = eachContact.Account.Name;
-            System.debug('contact name is '+eachContact.Name + ' ,its acc is '+accName);
-            
-        }   
-    }
-    public static void sampleSoql4() {
-        List<account> accountwithOppList = new List<account>();
-         accountwithOppList =[select Name,AnnualRevenue,(Select Name,Amount FROM opportunities WHERE stageName = 'Closed Won') from Account where type = 'Customer - Direct'];
-        for (account acc : accountwithOppList) {
-            System.debug('Account name '+acc.name + ' and its annual revenue is --> '+ acc.AnnualRevenue);
-            List<opportunity> listOpp = acc.opportunities;
-            for (opportunity opp : listOpp) {
-               System.debug('Opportunity name --> '+opp.Name);
-               System.debug('Opportunity amount --> '+ opp.Account); 
-            }
+        List<Contact> listCnt = [select id, name, account.name, account.industry from contact where account.industry = 'Energy'];
+
+        for (Contact eachContact : listCnt) {
+            string accName = eachContact.account.name;
+            system.debug('contact name is ' + eachContact.Name + ', its acc is ' + accName);
         }
-       }
+    }
+
+    public static void sampleSoql4() {
+        list<account> accountWithOpps = [select name, annualrevenue, 
+         (select amount, name from Opportunities where stageName = 'Closed Won')           
+        from account where type='Customer - Direct'];
+
+        for (account eachAccount : accountWithOpps) {
+            system.debug('account name: ' + eachAccount.Name + ' and its revenue is ' + eachAccount.AnnualRevenue);
+            //we want to fetch all opportunities in each account
+            List<Opportunity> listOpp = eachAccount.Opportunities;
+            for (Opportunity eachOpp : listOpp) {
+                system.debug('Opp Name : ' + eachOpp.Name + ', amount is ' + eachOpp.Amount);
+            }
+            system.debug('--------------');
+        }
+
+    }
        
 }

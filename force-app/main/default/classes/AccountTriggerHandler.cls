@@ -1,5 +1,8 @@
 public class AccountTriggerHandler {
-    /*public static void updateAccountDescription() {
+    public static void updateAccountDescription(List<account> accTriggerNew, 
+    List<account> accTriggerOld,
+    Map<id, account> accTriggerNewMap,
+    Map<id, account> accTriggerOldMap) {
      for (Account eachAcc : accTriggerNew) {
          //when inserted
          boolean updateDesc = false;
@@ -20,8 +23,8 @@ public class AccountTriggerHandler {
              eachAcc.Description = 'Account is now active. Enjoy!!!!!';
          }
      }
-    }*/
-    public static void updateVIPForAllContacts  (List<account> accTriggerNew, 
+    }
+/* public static void updateVIPForAllContacts  (List<account> accTriggerNew, 
                                                  List<account> accTriggerOld,
                                                  Map<id, account> accTriggerNewMap,
                                                  Map<id, account> accTriggerOldMap) {
@@ -38,7 +41,8 @@ public class AccountTriggerHandler {
         
        }
        update listContacts;
-    }/* public static void updateVIPForAllContacts(List<account> accTriggerNew, 
+    }*/
+     public static void updateVIPForAllContacts(List<account> accTriggerNew, 
     List<account> accTriggerOld,
     Map<id, account> accTriggerNewMap,
     Map<id, account> accTriggerOldMap) {
@@ -61,8 +65,86 @@ eachContact.VIP__c = newAccountRecord.VIP__c;// GET IT FROM ACCOUNT's VIP FIELD
 }
 //update all the contacts
 update listContacts;
+}   
 }
 }
+
+/* Whenever New Account Record is created, an associated Contact Record must be created
+automatically. Contact record fields as below:
+- Account name as Contact last name
+- Account phone as contact phone
+public static void ValidateAnnulRev(List<account> accTriggerNew, 
+                                    List<account> accTriggerOld,
+                                    Map<id, account> accTriggerNewMap,
+                                   Map<id, account> accTriggerOldMap) {
+
+    if (accTriggerOldMap != Null) {
+       for (account eachAcc : accTriggerNew) {
+        if(eachAcc.AnnualRevenue < accTriggerOldMap.get(eachAcc.id).AnnualRevenue || eachAcc.AnnualRevenue == null){
+          System.debug('Annual Revenue for an account cannot be reduced');
+            eachAcc.AnnualRevenue.addError('Annual Revenue for an account cannot be reduced');
+         
+        }
+       }
+    }
 }*/
+
+
+  /* Write a trigger on the Account when the Account is updated check all opportunities related to
+the account. Update all Opportunity Stage to close lost if stage name not already set to closed
+won.*/
+ /*public static void createContact(List<account> accTriggerNew, 
+                                    List<account> accTriggerOld,
+                                    Map<id, account> accTriggerNewMap,
+                                    Map<id, account> accTriggerOldMap) {
+                
+     List<Contact> listCont = new  List<Contact>();                                  
+    for (account eachAcc : accTriggerNew) {
+        contact con = new contact();
+        con.LastName = eachAcc.name;
+        con.Phone= eachAcc.Phone;
+        con.AccountId = eachAcc.id;
+        listCont.add(con);
+    }
+    if(!listCont.isEmpty()) insert listCont;
+ }*/
+
+ /*public static void AccountUpdate(List<account> accTriggerNew){
+List<Opportunity> listOfOpp = [select id,stageName from Opportunity where AccountId in : accTriggerNew];
+            
+        
+          for (opportunity eachOpp : listOfOpp) {
+            if (eachOpp.StageName != 'Closed Won') {
+                eachOpp.StageName = 'Closed Lost';
+            }    
+          }    
+          update listOfOpp;                          
+  }*/
+
+
+ /* Whenever an Account phone number is modified, update all the contacts of the Account as
+follows:
+- Contacts otherPhone as Old phone no of account
+- Contacts mobilePhone as New phone no of Account.*/
+
+ /* public static void AccountContactUpdate(List<account> accTriggerNew, 
+                                            List<account> accTriggerOld,
+                                            Map<id, account> accTriggerNewMap,
+                                            Map<id, account> accTriggerOldMap) {
+    Set<id> accIds = new set<id>();
+    for (account eachAcc : accTriggerNew) {
+        if (eachAcc.Phone != accTriggerOldMap.get(eachAcc.id).phone) {
+           accIds .add(eachAcc.id) ;
+        }
+    }if(!accIds.isEmpty()){
+    List<Contact> listCon = [select id,otherPhone,mobilePhone,accounId from contact where accountId in : accIds];
+        for (contact eachCon : listCon) {
+        eachCon.OtherPhone =accTriggerOldMap.get(eachCon.AccountId).Phone;
+        eachCon.MobilePhone = accTriggerNewMap.get(eachCon.AccountId).phone;
+        }
+      }
+      update listCon;
+   }*/
     
- }
+}
+   

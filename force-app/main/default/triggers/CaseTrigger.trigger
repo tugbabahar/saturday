@@ -1,7 +1,17 @@
 trigger CaseTrigger on Case (before insert,before update,before delete,after delete) {
+  //Show the message as 'Case origin is changed for [Case Number]' whenever case origin Field value is changed.
 
+/*if (trigger.isBefore && trigger.isInsert) {
+CaseTriggerHandler.CaseWithOrigin(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
+}
+if (trigger.isBefore && trigger.isUpdate) {
+CaseTriggerHandler.valid(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
+}*/
+if (trigger.isAfter && trigger.isInsert){
+CaseTriggerHandler.createChildCase(trigger.new,trigger.old,trigger.newMap,trigger.oldMap);
+}
   
- if (trigger.isInsert) {
+/* if (trigger.isInsert) {
     System.debug('before insert case trigger called');
  System.debug('trigger size is ===> '+trigger.size);
  }
@@ -13,7 +23,7 @@ trigger CaseTrigger on Case (before insert,before update,before delete,after del
     CaseTriggerHandler.countRecordUpdate += trigger.size;
     System.debug('# of records updated: '+   CaseTriggerHandler.countRecordUpdate);
 
- }
+ }*/
   
  
  

@@ -7,4 +7,4 @@ public class Primitivedata_Assignment {
     system.debug('the ID is '+id1+'. The string is '+var1+'. The boolean is '+ checkvar1);
 
    }
-}
+   }
