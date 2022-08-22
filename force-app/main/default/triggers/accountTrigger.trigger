@@ -20,7 +20,11 @@ if (trigger.isAfter && trigger.isUpdate) {
     }
     
     system.debug('====Trigger END====');
-
+  if (trigger.isAfter && trigger.isInsert) {
+     AccountQueueableExample aqe = new AccountQueueableExample(trigger.new);
+    ID jobID = system.enqueueJob(aqe);
+    System.debug('jobID is...  '+ jobID);
+  }
 
     
     
