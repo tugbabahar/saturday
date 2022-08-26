@@ -36,7 +36,7 @@ v. An Opportunity is deleted or undeleted*/
     }
 
 
-    @Future
+    @Future   
     public static void updateAccWithOppTargetAmount(set<Id> setIds) {
 
         futureCalled = true;

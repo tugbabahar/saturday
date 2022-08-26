@@ -19,7 +19,7 @@ public  class AccConAndOppOperations {
        Decimal sum = 0 ;
         list< Opportunity> closedWonOpp = [select id, Amount from Opportunity where StageName ='Closed Won' ];
         for (opportunity eachOpp : closedWonOpp) {
-           sum += eachOpp.Amount ;
+           sum += eachOpp.Amount ; 
         } 
         System.debug('Sum of all closed won opportunities = '+ sum);    
         return sum;        

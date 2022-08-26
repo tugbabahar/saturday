@@ -25,4 +25,20 @@ public class customerTriggerHandler {
         insert listPay;
       }
     }
+    public static void deletePayment(List<Customerrr__c> custTriggerOld) {
+      Set<id> setActives = new Set<id>();
+      Set<Object> setInactives = new Set<Object>();
+      for (Customerrr__c each : custTriggerOld) {
+        if (each.active__c == true) {
+          setActives.add(each.Id);
+        }else{
+          setInactives.add(each.Id);
+        }
+      }
+      List<Payment_Name__c> listPayAc = [select id from Payment_Name__c where payments__c in : setActives];
+      
+      delete listPayAc;
+     // List<Payment_Name__c> listPayIn = [select id from Payment_Name__c where payments__c in : setInactives and mode__c ='online'];
+     //delete listPayIn;
+    }
 }

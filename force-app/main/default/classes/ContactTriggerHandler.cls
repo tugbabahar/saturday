@@ -1,5 +1,5 @@
 public class ContactTriggerHandler {
-  /*  public static void contactUpdateValidation1(list<Contact> conTriggerNew ,
+    public static void contactUpdateValidation1(list<Contact> conTriggerNew ,
                                                  Map<id, contact> conTriggerNewMap,
                                                  List<Contact> conTriggerOld,
                                                  Map<id, Contact> conTriggerOldMap) {
@@ -16,10 +16,12 @@ public class ContactTriggerHandler {
                                                 Map<id, Contact> conTriggerOldMap) {
         for (contact eachContact : conTriggerNew) {
            if (eachContact.LeadSource != conTriggerOldMap.get(eachContact.id).LeadSource) {
+            string customErrorMsg = system.Label.ContactValidation2;
             eachContact.LeadSource.addError('Cannot update LEAD SOURCE! please USER.');
            } 
         }
-    }*/  /* When a new contact is created for an existing account then set contact other phone as account phone*/
+    }
+     /* When a new contact is created for an existing account then set contact other phone as account phone*/
    /* public static void ContactUpdate(List<contact> conTriggerNew, 
                                     List<contact> conTriggerOld,
                                     Map<id, contact> conTriggerNewMap,

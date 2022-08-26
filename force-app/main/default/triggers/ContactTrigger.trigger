@@ -52,7 +52,7 @@
    /* if (trigger.isAfter && trigger.isUpdate) {
         ContactTriggerHandler.UpdateAccount(trigger.new,trigger.old,trigger.newMap,trigger.oldMap); 
     }*/
-    if (trigger.isAfter) {
+   /* if (trigger.isAfter) {
         Set<id> setAccIds = new Set<id>();
         if (trigger.isInsert || trigger.isUpdate || trigger.isUndelete) {
             for (contact eachcon : trigger.new) {
@@ -70,7 +70,7 @@
             }
         ContactTriggerHandler.updateAccountsContactSize(setAccIds);
     }
-}
+}*/
 
 
 
@@ -134,12 +134,12 @@
   
  
   
-    /*  if (trigger.isBefore && trigger.isUpdate) {
+     /*if (trigger.isBefore && trigger.isUpdate) {
         ContactTriggerHandler.contactUpdateValidation1(Trigger.New, Trigger.NewMap, Trigger.Old, Trigger.OldMap);
-    }
-   if (trigger.isBefore && trigger.isUpdate) {
-        ContactTriggerHandler.contactUpdateValidation2(Trigger.New, Trigger.NewMap, Trigger.Old, Trigger.OldMap);
     }*/
+    if (trigger.isBefore && trigger.isUpdate) {
+        ContactTriggerHandler.contactUpdateValidation2(Trigger.New, Trigger.NewMap, Trigger.Old, Trigger.OldMap);
+    }
 
 
  /*   
@@ -190,7 +190,7 @@
                 system.debug('After UPDATE Trigger');
             }
         }*/
-    
+ }
 
 
 
