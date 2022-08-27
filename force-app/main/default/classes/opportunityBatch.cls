@@ -29,6 +29,7 @@ public class opportunityBatch implements Database.Batchable<SObject>, database.s
     public void finish(Database.BatchableContext bc){
         system.debug('Total Number of tasks created:   '+count);
     }
+    
 }
     
 

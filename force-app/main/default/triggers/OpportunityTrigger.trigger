@@ -130,7 +130,7 @@ v. An Opportunity is deleted or undeleted*/
       }
   }
   
-  if(Trigger.isBefore && Trigger.isDelete){
+ /* if(Trigger.isBefore && Trigger.isDelete){
       for (Opportunity eachOpp : trigger.old) {
           setIds.add(eachOpp.AccountId);
       }
@@ -142,6 +142,42 @@ v. An Opportunity is deleted or undeleted*/
           OpportunityTriggerHandler.updateAccTotalAmountGenerated(setIds);
           OpportunityTriggerHandler.updateAccWithOppTargetAmount(setIds);
       }
-  }
+  }*/
+
+  	//in which event should we implement our requirement?
+	//Insert or Update?
+		//Insert.
+    //Before or After?
+    	//Do we need ID of opportunity? YES.
+    	//To create related record.
+    //AFTER INSERT it is.
+    //call handler from here.
+    //think in bulk 
+    //	-> multiple opportunities are inserted
+    //		-> create opportunity product for EACH opportunity.
+    
+    
+    if(trigger.isAfter && trigger.isInsert){
+        set<id> oppIds = trigger.newMap.keySet();
+       
+        //create new a opportunity product record for each opportunity.
+        List<OpportunityLineItem> listOLI = new list<OpportunityLineItem>();
+        product2 p2 = [select id, ProductCode  from product2 where ProductCode = 'SFDC' limit 1];
+        system.debug('product 2 => ' + p2);
+        for(opportunity opp: trigger.new){
+            OpportunityLineItem oli = new OpportunityLineItem();
+            oli.OpportunityId = opp.id;
+            oli.Product2Id = p2.id; //how can we get the product id?
+            oli.Quantity = 1;
+            listOLI.add(oli);
+            system.debug('oli => ' + oli);
+        }
+        if(!listOLI.isEmpty()){
+            insert listOLI;
+             system.debug('listOLI => ' + listOLI);
+        }
+        
+    }
+  
   }
  
