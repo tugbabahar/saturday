@@ -6,7 +6,7 @@ for(string eachCountry : countries){
     string countryCode = cs.Country_Code__c;
    system.debug( 'country is '+ eachCountry + ' , its code is '+ countryCode);
 }
-system.debug('map of country code custom setting ==> '+mcs);
+//system.debug('map of country code custom setting ==> '+mcs);
 
 
 /*{"United States":{"LastModifiedDate":"2022-08-26T01:07:05.000Z","IsDeleted":false,"CreatedById":"0058Z000008DILJQA4","CreatedDate":"2022-08-26T01:07:05.000Z","Country_Code__c":"USA","Id":"a048Z00000mKPS4QAO","LastModifiedById":"0058Z000008DILJQA4","SetupOwnerId":"00D8Z000001r5EVUAY","Name":"United States","SystemModstamp":"2022-08-26T01:07:05.000Z"}
